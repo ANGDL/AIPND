@@ -1,0 +1,1019 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{???????\_AIPND\_P1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{人工智能编程基础纳米学位}\label{ux4ebaux5de5ux667aux80fdux7f16ux7a0bux57faux7840ux7eb3ux7c73ux5b66ux4f4d}
+
+\subsection{项目知识点练习册}\label{ux9879ux76eeux77e5ux8bc6ux70b9ux7ec3ux4e60ux518c}
+
+\subsubsection{项目：（P1
+机器人走迷宫预备练习题）}\label{ux9879ux76eep1-ux673aux5668ux4ebaux8d70ux8ff7ux5babux9884ux5907ux7ec3ux4e60ux9898}
+
+在这个notebook文件中，我们设计了多项练习题来帮助你为之后的实战项目作准备，并希望可以通过编程练习来帮助你更好地掌握前几周内所学习的内容！
+​
+
+有些模板代码已经提供给你，但你还需要实现更多的功能来完成这个练习。除非有明确要求，你无须修改任何已给出的代码。每一个练习都配有详细的指导，需要实现的部分也会在注释中以'TODO'标出。
+​
+
+除了实现代码外，你还\textbf{需要}回答一些与项目及代码相关的问题。每个需要回答的问题都会以
+\textbf{'问题 X'} 标记。请仔细阅读每个问题，并且在问题后的
+\textbf{'回答'} 部分写出完整的答案。助教将根据 你对问题的回答 和
+撰写代码实现的功能 来对你提交的练习进行评分。 ​
+
+\begin{quote}
+\textbf{提示：}Code 和 Markdown 区域可通过 \textbf{Shift + Enter}
+快捷键运行。此外，Markdown可以通过双击进入编辑模式。
+\end{quote}
+
+\subsection{\#\#\#
+让我们开始吧！}\label{ux8ba9ux6211ux4eecux5f00ux59cbux5427}
+
+    \subsubsection{Task
+0：数据类型和运算}\label{task-0ux6570ux636eux7c7bux578bux548cux8fd0ux7b97}
+
+\subsubsection{问答题}\label{ux95eeux7b54ux9898}
+
+\textbf{问题}：
+
+python有几种基本数据类型，具体是哪些？这些数据类型中哪些是可变的，哪些是不可变的？哪些是有序的，哪些是无序的？
+
+    \textbf{回答}：
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+基本数据类型 & 是否可变 & 是否有序\tabularnewline
+\midrule
+\endhead
+Number（数字） & 否 &\tabularnewline
+String（字符串） & 否 & 是\tabularnewline
+Tuple（元组） & 否 & 是\tabularnewline
+List（列表） & 是 & 是\tabularnewline
+Set（集合） & 是 & 否\tabularnewline
+Dictionary（字典） & 是 & 否\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{可变数据类型的特点:}\\
+定义一个变量 v,
+将其传入一个可调用对象（函数、lambda表达式、函数类）a\_function(v\_input),
+在a\_function中改变v\_input中的值，若type(v)是可变类型，则v的值随之改变，若type(v)是不可变类型，则v的值保持不变。示例代码：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ a_function(v_input):}
+    \ControlFlowTok{if} \BuiltInTok{type}\NormalTok{(v_input) }\OperatorTok{==} \BuiltInTok{list}\NormalTok{:}
+\NormalTok{        v_input.append(}\DecValTok{2019}\NormalTok{)}
+    \ControlFlowTok{elif} \BuiltInTok{type}\NormalTok{(v_input) }\OperatorTok{==} \BuiltInTok{str}\NormalTok{:}
+\NormalTok{        v_input }\OperatorTok{=} \StringTok{'hello 2019'}
+
+\NormalTok{v1 }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{]}
+\NormalTok{v2 }\OperatorTok{=} \StringTok{'bye 2018'}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{'before call a_function:'}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{'v1='}\NormalTok{, v1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{'v2='}\NormalTok{, v2)}
+
+\NormalTok{a_function(v1)}
+\NormalTok{a_function(v2)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{'after call a_function:'}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{'v1='}\NormalTok{, v1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{'v2='}\NormalTok{, v2)}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{def} \PY{n+nf}{a\PYZus{}function}\PY{p}{(}\PY{n}{v\PYZus{}input}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{v\PYZus{}input}\PY{p}{)} \PY{o}{==} \PY{n+nb}{list}\PY{p}{:}
+                \PY{n}{v\PYZus{}input}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{2019}\PY{p}{)}
+            \PY{k}{elif} \PY{n+nb}{type}\PY{p}{(}\PY{n}{v\PYZus{}input}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str}\PY{p}{:}
+                \PY{n}{v\PYZus{}input} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hello 2019}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{v1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+        \PY{n}{v2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bye 2018}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{before call a\PYZus{}function:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v2=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v2}\PY{p}{)}
+        
+        \PY{n}{a\PYZus{}function}\PY{p}{(}\PY{n}{v1}\PY{p}{)}
+        \PY{n}{a\PYZus{}function}\PY{p}{(}\PY{n}{v2}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{after call a\PYZus{}function:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v1=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v2=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{v2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+before call a\_function:
+v1= [1, 2, 3]
+v2= bye 2018
+after call a\_function:
+v1= [1, 2, 3, 2019]
+v2= bye 2018
+
+    \end{Verbatim}
+
+    \subsubsection{任务描述}\label{ux4efbux52a1ux63cfux8ff0}
+
+熟悉基本数据类型。
+
+\subsubsection{练习}\label{ux7ec3ux4e60}
+
+\textbf{练习0}
+
+新建一个二维列表，列表名定义为matrix，列表的内容如下：
+
+第一项：0,1,2
+
+第二项：3,4,5
+
+第三项：6,7,8
+
+注意，二维列表可以当做矩阵来看，某一项为行，某一项中的第几个为列，比如数字1处于matrix列表的第一行第二列，用索引值来看的话就是行0，列1（因为所以是从零开始计数的）。以下都用行列来表示了。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：完成这个列表的创建}
+         \PY{n}{matrix} \PY{o}{=} \PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{matrix}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+\end{Verbatim}
+            
+    \textbf{练习1}
+
+使用列表方法给matrix列表新增一项（行），项（行）的内容为 'bj','gz','sh'
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：使用字符串方法给matrix列表添加}
+         \PY{n}{matrix}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{matrix}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} [[0, 1, 2], [3, 4, 5], [6, 7, 8], ['bj', 'gz', 'sh']]
+\end{Verbatim}
+            
+    \textbf{练习2}
+
+1、用代码输出matrix第二行第三列的值（应该为5）
+
+2、用代码输出matrix第四行的值（应该输出bj,gz,sh）
+
+3、用代码输出matrix的行数和列数(应该输出4和3)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{matrix\PYZus{}2\PYZus{}3} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{matrix\PYZus{}2\PYZus{}3}\PY{p}{)}
+        \PY{n}{matrix\PYZus{}row4} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{matrix\PYZus{}row4}\PY{p}{)}
+        \PY{n}{rows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{matrix}\PY{p}{)}
+        \PY{n}{cols} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5
+['bj', 'gz', 'sh']
+4 3
+
+    \end{Verbatim}
+
+    \textbf{练习3}
+
+新建一个字典，字典的名字为loc，将新增的项（'bj','gz','sh'）分别作为字典的键（key），bj的值（value）为matrix的第一行的和（输出时能看到值为3），gz的值为matrix的第二行的和（输出时能看到值为12），sh的值为matrix的第三行（输出时能看到值为21）。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：新建字典loc，新建时可以使用之前习题所使用的方法，不要重新输入具体的值来创建}
+         \PY{n}{loc} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bj}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{loc}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{loc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} \{'bj': 3, 'gz': 12, 'sh': 21\}
+\end{Verbatim}
+            
+    \textbf{练习4}
+
+输出字典loc中键sh的值是多少
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO:已知字典key求该key的value值}
+         \PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 21
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{loc}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 21
+\end{Verbatim}
+            
+    \textbf{练习5}
+
+字符串连接，连接matrix第四行的所有元素并输出
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO:}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{===}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+bj===gz===sh
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsubsection{Task 1：控制流}\label{task-1ux63a7ux5236ux6d41}
+
+\subsubsection{问答题}\label{ux95eeux7b54ux9898}
+
+\textbf{问题 0}：
+
+if判断和while后面跟的是什么，或者说什么情况下会进入判断体和循环体（判断循环缩进下的内容）？\\
+\textbf{答:} if判断和while后面跟的都是\textbf{执行条件}
+
+一个空列表作为if判断或者是while后面跟的东西的话，是否会进入判断体或者循环体（判断循环缩进下的内容）？
+
+    \textbf{回答}：一个空列表作为if判断或者是while后面跟的东西的话，不会进入判断体或者循环体。此外，用None，0,
+''，\{\}，() ,{[}{]}作为执行条件的话，也不会进入循环。
+
+    \textbf{问题 1}：
+
+break和continue的区别？
+
+    \textbf{回答}：
+
+break是跳出循环体，不再执行该循环体的任何循环；contiunte掠过本次循环，继续下次循环。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{6}\NormalTok{):}
+    \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{==} \DecValTok{2}\NormalTok{:}
+        \ControlFlowTok{break}
+    \BuiltInTok{print}\NormalTok{(i)}
+    
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{6}\NormalTok{):}
+    \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{==} \DecValTok{2}\NormalTok{:}
+        \ControlFlowTok{continue}
+    \BuiltInTok{print}\NormalTok{(i)}
+        
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{k}{break}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{k}{continue}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+3
+4
+5
+
+    \end{Verbatim}
+
+    \textbf{问题 2}：
+
+请简要描述迭代器，生成器和可迭代对象的关系。
+
+    \textbf{回答}：https://zhuanlan.zhihu.com/p/36810728
+
+    \subsubsection{循环能做什么}\label{ux5faaux73afux80fdux505aux4ec0ux4e48}
+
+循环能让一段重复逻辑的工作自动执行，并在一定条件时候开始，一定条件时候结束。\\
+我们可以利用循环每隔一段时间去检查设备的温度是否正常，检查网络链接是否正常；还可以利用循环处理大规模数据，筛选出相同条件的数据，近乎每个程序中都离不开循环。
+
+    \subsubsection{为什么要用循环？}\label{ux4e3aux4ec0ux4e48ux8981ux7528ux5faaux73af}
+
+程序处理的数据一般是数以千计的，加入我们有一个列表students，存了1000名学生信息，包括姓名、性别、考试成绩等。现在要求我们找出，在本次考试中，成绩在60\textasciitilde{}80之间的学生名单。那么，如果不用循环，我们只能一行一句代码去判断学生的成绩是否满足条件，我们需要写至少1000行。但是如果用循环，我们只需要写一个循环题，不超过3行的代码既可以完成。极大的提高了开发效率，更重要的是代码维护的难度。
+
+    \subsubsection{循环需要注意的地方}\label{ux5faaux73afux9700ux8981ux6ce8ux610fux7684ux5730ux65b9}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{=}\NormalTok{ [}\StringTok{'a'}\NormalTok{, }\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{]}
+
+\CommentTok{# i 是索引, data[i]是data中的元素}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(data)):}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{'第}\SpecialCharTok{\{\}}\StringTok{个元素是}\SpecialCharTok{\{\}}\StringTok{'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i, data[i]))}
+    
+\CommentTok{# e 是data中的元素}
+\NormalTok{i }\OperatorTok{=} \DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ e }\KeywordTok{in}\NormalTok{ data:   }
+    \BuiltInTok{print}\NormalTok{(}\StringTok{'第}\SpecialCharTok{\{\}}\StringTok{个元素是}\SpecialCharTok{\{\}}\StringTok{'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i, e))}
+\NormalTok{    i }\OperatorTok{+=} \DecValTok{1}
+    
+\CommentTok{# i是索引，e 是data中的元素}
+\ControlFlowTok{for}\NormalTok{ i, e }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(data):}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{'第}\SpecialCharTok{\{\}}\StringTok{个元素是}\SpecialCharTok{\{\}}\StringTok{'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i, e))}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} i 是索引, data[i]是data中的元素}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{第}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{个元素是}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} e 是data中的元素}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}   
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{第}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{个元素是}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{e}\PY{p}{)}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} i是索引，e 是data中的元素}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{e} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{第}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{个元素是}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{e}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+第0个元素是a
+第1个元素是b
+第2个元素是c
+第0个元素是a
+第1个元素是b
+第2个元素是c
+第0个元素是a
+第1个元素是b
+第2个元素是c
+
+    \end{Verbatim}
+
+    \subsubsection{任务描述}\label{ux4efbux52a1ux63cfux8ff0}
+
+针对控制流的练习。
+
+\subsubsection{练习}\label{ux7ec3ux4e60}
+
+\textbf{练习0}
+
+循环输出列表matrix的每一个值，每一行。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：循环}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{rows}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+6
+7
+8
+
+    \end{Verbatim}
+
+    \textbf{练习1}
+
+找出数字7所在的索引，输出行列索引，另外要求找到后必须立即停止循环。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：循环判断}
+         \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{rows}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}
+             \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cols}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{matrix}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{count}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 5
+\end{Verbatim}
+            
+    \textbf{练习2}
+
+请写一个列表表达式，将matrix中的数据全部提取出来变成一个一维列表merge，最后输出该列表
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{merge} \PY{o}{=} \PY{p}{[}\PY{n}{j} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{matrix}  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{i}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{merge}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 'bj', 'gz', 'sh']
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsubsection{Task 2：函数}\label{task-2ux51fdux6570}
+
+\subsubsection{问答题}\label{ux95eeux7b54ux9898}
+
+\textbf{问题 0}：
+
+解释下return的作用，return了什么？return的东西去了哪里？
+
+    \textbf{回答}：\\
+return就是为了告诉函数，函数的调用着能通过这个函数得到什么。\\
+\texttt{a\ =\ sum({[}1,\ 2,\ 3{]})},
+\texttt{sum()}函数return的结果去了赋值符合=
+的左边，传递给了\texttt{a}。如果返回结果没有传递，则返回值被丢弃。
+
+    \textbf{问题 1}：
+
+代码1、
+
+\begin{verbatim}
+a = 100
+def test_score(a):
+    print(a)
+test_score(95)
+\end{verbatim}
+
+代码2、
+
+\begin{verbatim}
+a = 100
+def test_score(a = 90):
+    print(a)
+test_score()
+\end{verbatim}
+
+代码3、
+
+\begin{verbatim}
+a = 100
+def test_score():
+    print(a)
+test_score()
+\end{verbatim}
+
+这三个代码分别输出什么？同样输出a为什么造成这样的结果，请给于解释造成这个输出结果的的原因。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{k}{def} \PY{n+nf}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             
+         \PY{n}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{o}{=}\PY{l+m+mi}{95}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+95
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{k}{def} \PY{n+nf}{test\PYZus{}score}\PY{p}{(}\PY{n}{a} \PY{o}{=} \PY{l+m+mi}{90}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}    }
+         \PY{n}{a} \PY{o}{=}\PY{l+m+mi}{100}
+         \PY{n}{test\PYZus{}score}\PY{p}{(}\PY{n}{a} \PY{o}{=} \PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{k}{def} \PY{n+nf}{test\PYZus{}score}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n}{test\PYZus{}score}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1000
+
+    \end{Verbatim}
+
+    \textbf{回答}：
+
+    \textbf{问题 2}： 代码1、
+
+\begin{verbatim}
+
+def test_score(a):
+    a = 95
+a = 100
+test_score(a)
+print(a)
+\end{verbatim}
+
+代码2、
+
+\begin{verbatim}
+def test_score(a):
+    a.append(95)
+a = [100]
+test_score(a)
+print(a)
+\end{verbatim}
+
+这两个代码分别输出什么？同样传入参数a为什么造成这样的结果，请给于解释造成这个输出结果的的原因。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{95}
+         \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{95}\PY{p}{)}
+         \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n}{test\PYZus{}score}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[100, 95]
+
+    \end{Verbatim}
+
+    \textbf{回答}：
+
+    \textbf{问题 3}：
+
+定义函数的时候，函数的参数的名字，是否必须跟调用时传入的参数名字相同？大概解释下你的答案。
+
+    \textbf{回答}：
+
+    \textbf{问题 4}：
+
+请解释下缩进在python中有什么作用。
+
+    \textbf{回答}：
+
+    \subsubsection{任务描述}\label{ux4efbux52a1ux63cfux8ff0}
+
+主要是对函数部分的掌握
+
+\subsubsection{练习}\label{ux7ec3ux4e60}
+
+\textbf{练习0}
+
+请写一个函数,函数名：get\_index，函数有一个默认参数value，默认值为0，还有一个必须参数mat（是一个二维列表，请务必保证上面练习题中的matrix正确生成并运行过，测试时调用函数要用），该函数的功能是返回value所对应在mat上的索引（不需要考虑value不存在于matrix的情况）
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：编写题目要求的函数}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}index}\PY{p}{(}\PY{n}{mat}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{rows}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cols}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{n}{value}\PY{p}{:}
+                         \PY{k}{return} \PY{n}{i}\PY{p}{,} \PY{n}{j}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{get\PYZus{}index}\PY{p}{(}\PY{n}{matrix}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(0, 0)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{get\PYZus{}index}\PY{p}{(}\PY{n}{matrix}\PY{p}{,} \PY{n}{value} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2, 0)
+
+    \end{Verbatim}
+
+    \textbf{练习1}
+
+请写一个函数，函数名：find\_max,函数有一个必须参数dicts（是一个字典，请务必保证上面练习题loc字典有正确生成并运行过，测试时调用函数要用），该函数返回参数dicts中value最大的键值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：编写题目要求的函数}
+         \PY{k}{def} \PY{n+nf}{find\PYZus{}max}\PY{p}{(}\PY{n}{dicts}\PY{p}{)}\PY{p}{:}
+             \PY{n}{max\PYZus{}key} \PY{o}{=} \PY{k+kc}{None}
+             \PY{n}{max\PYZus{}value} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{k}\PY{p}{,} \PY{n}{v} \PY{o+ow}{in} \PY{n}{dicts}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{v}  \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}value}\PY{p}{:}
+                     \PY{n}{max\PYZus{}key} \PY{o}{=} \PY{n}{k}
+             \PY{k}{return} \PY{n}{max\PYZus{}key}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{find\PYZus{}max}\PY{p}{(}\PY{n}{loc}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sh
+
+    \end{Verbatim}
+
+    \subsubsection{Task 3：异常处理}\label{task-3ux5f02ux5e38ux5904ux7406}
+
+\subsubsection{问答题}\label{ux95eeux7b54ux9898}
+
+\textbf{问题}：
+
+请描述下
+
+\begin{verbatim}
+try:
+<语句0>        
+except <名字>：
+<语句1>              
+else:
+<语句3>
+finally:
+<语句4>
+\end{verbatim}
+
+的运行流程。
+
+    \textbf{回答}：
+
+    \textbf{练习}
+
+使用异常处理语句，编写一个函数change，该函数有一个输入mat，mat为一个二维列表，函数的功能是将列表中的值是奇数的项置为1，将列表中的值是偶数的项置为0，如果是非数值型内容的项置为字符串error，最后返回这个更改后的字符串。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Todo}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{change}\PY{p}{(}\PY{n}{matrix}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsubsection{思考题：综合}\label{ux601dux8003ux9898ux7efcux5408}
+
+\subsubsection{任务描述}\label{ux4efbux52a1ux63cfux8ff0}
+
+复习所有语法，解答此思考题
+
+\subsubsection{练习}\label{ux7ec3ux4e60}
+
+编写一个函数，输入n为偶数时，调用函数求1/2+1/4+...+1/n,当输入n为奇数时，调用函数求1/1+1/3+...+1/n，如果是非数值型参数时输出"Error
+parameter!"，最后输出相加的结果（如果是非数值型参数不输出）。
+函数名和参数名不做限制。
+
+\textbf{提示：}
+
+循环判断和异常处理的组合应用
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TODO：（此处应有TODO内容）}
+\end{Verbatim}
+
+
+    \textbf{注意: 当你写完了所有的代码，并且回答了所有的问题。你就可以把你的
+iPython Notebook 导出成 HTML 文件。你可以在菜单栏，这样导出File
+-\textgreater{} Download as -\textgreater{} HTML (.html)把这个 HTML
+和这个 iPython notebook 一起做为你的作业提交给助教。}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
